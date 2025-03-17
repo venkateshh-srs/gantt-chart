@@ -1,0 +1,134 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+html {
+  /* overflow: hidden; */
+  background-color: rgb(242, 242, 242);
+}
+.heading {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  margin-bottom: 20px;
+}
+.container {
+  /* height: auto; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+  background-color: rgb(242, 242, 242);
+
+  overflow-y: scroll;
+  gap: 200px;
+}
+.input-container {
+  position: relative;
+  top: 100px;
+  align-self: center;
+}
+.input-wrapper {
+  display: flex;
+  gap: 10px;
+
+  align-items: center;
+  align-self: center;
+}
+.input-area {
+  outline: none;
+  resize: none;
+
+  width: 600px;
+  align-items: center;
+  justify-content: center;
+  border-color: rgb(181, 181, 181);
+  /* max-width: 350px; */
+  background-color: rgb(250, 250, 250);
+  /* background-color: rgb(255, 0, 0); */
+
+  padding: 10px;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 16px;
+  border-radius: 10px;
+}
+.input-area:focus {
+  border-color: rgb(93, 93, 93);
+}
+.send-btn {
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  width: 80px;
+  height: 40px;
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+}
+.validate-error {
+  color: red;
+}
+#gantt {
+  /* border: 1px solid green; */
+  /* width: 70%; */
+  /* margin-top: 100px; */
+  z-index: 10;
+  align-self: center;
+}
+@media (max-width: 730px) {
+  .input-area {
+    outline: none;
+    resize: none;
+    width: 250px;
+    align-self: center;
+
+    /* max-width: 350px; */
+    padding: 10px;
+  }
+}
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 65px;
+  aspect-ratio: 1;
+  position: relative;
+  align-self: center;
+}
+.loader:before,
+.loader:after {
+  content: "";
+  position: absolute;
+  border-radius: 50px;
+  box-shadow: 0 0 0 3px inset #373737;
+  animation: l4 2.5s infinite;
+}
+.loader:after {
+  animation-delay: -1.25s;
+}
+@keyframes l4 {
+  0% {
+    inset: 0 35px 35px 0;
+  }
+  12.5% {
+    inset: 0 35px 0 0;
+  }
+  25% {
+    inset: 35px 35px 0 0;
+  }
+  37.5% {
+    inset: 35px 0 0 0;
+  }
+  50% {
+    inset: 35px 0 0 35px;
+  }
+  62.5% {
+    inset: 0 0 0 35px;
+  }
+  75% {
+    inset: 0 0 35px 35px;
+  }
+  87.5% {
+    inset: 0 0 35px 0;
+  }
+  100% {
+    inset: 0 35px 35px 0;
+  }
+}
