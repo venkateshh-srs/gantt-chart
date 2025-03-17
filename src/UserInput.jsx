@@ -24,7 +24,7 @@ const UserInput = ({ setTasks, setLoading }) => {
       //show loader in plce of gantt chart div
       setLoading(true);
       try {
-        console.log(process.env.BACKEND_URL);
+        // console.log(process.env.BACKEND_URL);
 
         const res = await axios.post(
           process.env.BACKEND_URL + "/generate-gantt",
