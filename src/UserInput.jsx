@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
-const UserInput = ({ setTasks, setLoading }) => {
+const UserInput = ({ setData, setLoading }) => {
   const inputRef = useRef(null);
   const [input, setInput] = useState("");
 
@@ -16,9 +16,9 @@ const UserInput = ({ setTasks, setLoading }) => {
   }, [input]);
 
   const sendMessage = async () => {
-    // console.log("sending...");
+    console.log("sending...");
     setInput("");
-    setTasks([]);
+    setData(null);
 
     if (input.trim()) {
       //show loader in plce of gantt chart div
@@ -34,10 +34,12 @@ const UserInput = ({ setTasks, setLoading }) => {
         );
 
         // console.log(res.data);
+        console.log(res.data);
 
         if (res.data.isValid) {
           //set data and send to App.jsx
-          setTasks(res.data.tasks);
+
+          setData(res.data);
         } else {
           //set error
           //   console.log(errorRef);

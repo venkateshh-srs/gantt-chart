@@ -60,12 +60,12 @@ html {
   cursor: pointer;
   width: 80px;
   height: 40px;
-  background-color: black;
+  background-color: #1e41ab;
   color: white;
   border-radius: 10px;
 }
 .validate-error {
-  color: red;
+  color: rgb(255, 42, 42);
 }
 #gantt {
   /* border: 1px solid green; */
@@ -97,7 +97,7 @@ html {
   content: "";
   position: absolute;
   border-radius: 50px;
-  box-shadow: 0 0 0 3px inset #373737;
+  box-shadow: 0 0 0 3px inset #123cbb;
   animation: l4 2.5s infinite;
 }
 .loader:after {
@@ -132,3 +132,12 @@ html {
     inset: 0 35px 35px 0;
   }
 }
+/* .holiday .bar {
+  fill: red !important; 
+  opacity: 0.5;
+}
+
+.holiday text {
+  fill: white !important;
+  font-weight: bold;
+} */

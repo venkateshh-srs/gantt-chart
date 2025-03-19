@@ -1,31 +1,80 @@
-import React, { useEffect, useState } from "react";
-import Gantt from "frappe-gantt";
+import React, { useEffect, useRef } from "react";
+import "dhtmlx-gantt";
+import "dhtmlx-gantt/codebase/dhtmlxgantt.css";
 
-const GanttChart = ({ tasks }) => {
-  const [gantt, setGantt] = useState(null);
-  // console.log(props);
+const GanttChart = ({ data }) => {
+  const ganttContainer = useRef(null);
 
   useEffect(() => {
-    if (tasks.length) {
-      const ganttChart = new Gantt("#gantt", tasks, {
-        // on_click: (task) => console.log("Task clicked", task),
-        // on_date_change: (task, start, end) =>
-        //   console.log("Date changed", task, start, end),
-        // on_progress_change: (task, progress) =>
-        //   console.log("Progress changed", task, progress),
-        view_mode: "Day",
-        infinite_padding: false,
-        // view_mode_select: true,
-        scroll_to: "start",
-        // snap_at: "2d",
-        // container_height: 900,
-        padding: 40,
-      });
+    if (ganttContainer.current && data) {
+      const users = data.users;
+      const tasks = data.tasks;
+      const links = data.links;
+      gantt.serverList("users", users);
+      console.log(users, tasks, links);
 
-      setGantt(ganttChart);
+      gantt.config.date_format = "%Y-%m-%d %H:%i";
+      gantt.config.step = 1;
+      gantt.config.min_column_width = 30;
+      gantt.config.fit_tasks = true;
+      // gantt.config.grid_resize = true; // Enables column resizing
+
+      gantt.config.columns = [
+        { name: "text", label: "Task", tree: true, width: 80 },
+        {
+          name: "assigned",
+          label: "Assigned To",
+          align: "center",
+          width: 200,
+          template: function (task) {
+            if (!task.user_ids || task.user_ids.length === 0)
+              return "Unassigned";
+            return task.user_ids
+              .map((id) => {
+                let user = users.find((u) => u.key == id);
+                return user ? user.label : "Unknown";
+              })
+              .join(", ");
+          },
+        },
+        {
+          name: "start_date",
+          label: "Start Date",
+          align: "center",
+          width: 80,
+        },
+        { name: "duration", label: "Duration", align: "center", width: 80 },
+        { name: "add", label: "", width: 44 },
+      ];
+
+      gantt.locale.labels.section_assigned_users = "Users";
+
+      gantt.config.lightbox.sections = [
+        {
+          name: "description",
+          height: 70,
+          map_to: "text",
+          type: "textarea",
+          focus: true,
+        },
+        {
+          name: "assigned_users",
+          height: 50,
+          map_to: "user_ids",
+          type: "checkbox",
+          options: gantt.serverList("users"),
+        },
+        { name: "time", height: 72, type: "duration", map_to: "auto" },
+      ];
+
+      gantt.init(ganttContainer.current);
+      gantt.parse({ tasks, links });
     }
-  }, [tasks]);
+  }, []);
 
-  return <div id="gantt"></div>;
+  return (
+    <div ref={ganttContainer} style={{ width: "100%", height: "500px" }}></div>
+  );
 };
+
 export default GanttChart;

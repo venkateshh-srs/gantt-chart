@@ -7,20 +7,18 @@ import UserInput from "./UserInput";
 
 const App = () => {
   //   console.log(sampleTasks);
-  const [tasks, setTasks] = useState([]);
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
 
   return (
     <>
       <div className="container">
-        
-        <UserInput setTasks={setTasks} setLoading={setLoading} />
-        {/* <div>hi</div> */}
+        <UserInput setData={setData} setLoading={setLoading} />
         {loading ? (
           <div className="loader"></div>
         ) : (
           <div>
-            <GanttChart tasks={tasks} />
+            <GanttChart data={data} />
           </div>
         )}
       </div>
